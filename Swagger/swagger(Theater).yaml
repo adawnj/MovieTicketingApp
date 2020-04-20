@@ -1,0 +1,118 @@
+swagger: '2.0'
+info:
+  description: 'This is the swagger about the online movie booking system '
+  version: 1.0.0
+  title: Swagger online movie booking system
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: theater
+    description: Theater information
+paths:
+  /theater:
+    post:
+      tags:
+        - theater
+      summary: Add a new movie to the theater
+      description: ''
+      operationId: addTheater
+      parameters:
+        - in: body
+          name: body
+          description: Theater needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Theater'
+      responses:
+        '405':
+          description: Invalid input
+'/theater/{theaterid}':
+    put:
+      tags:
+        - theater
+      summary: Update an existing theater
+      description: ''
+      operationId: updateTheater
+      parameters:
+        - in: body
+          name: body
+          description: theater details need to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Theater'
+      responses:
+        '400':
+          description: Invalid theater name supplied
+        '404':
+          description: Theater not found
+        '405':
+          description: Validation exception
+  '/theater/{theatername}':
+    get:
+      tags:
+        - theater
+      summary: Find theater by name
+      description: Returns a single theater
+      operationId: getTheaterByName
+      parameters:
+        - name: theatername
+          in: path
+          description: theater name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Theater'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Theaterr not found
+  '/theater/{theaterid}':
+    delete:
+      tags:
+        - theater
+      summary: Deletes a theater
+      description: ''
+      operationId: delete
+      parameters:
+        - name: theaterid
+          in: path
+          description: Theaterid to delete
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid Theaterid
+        '404':
+          description: Theater not found
+  
+definitions:
+
+  Theater:
+    type: object
+    properties:
+      theaterid:
+      type: Integer
+      theatername:
+        type: string
+      city:
+        type: string
+      address:
+        type: string
+      seatingCapacity:
+        type: integer
+        format: int64
+
+    xml:
+      name: theater
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

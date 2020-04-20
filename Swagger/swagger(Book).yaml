@@ -1,0 +1,90 @@
+swagger: '2.0'
+info:
+  description: 'This is the swagger about the online movie booking system '
+  version: 1.0.0
+  title: Swagger online movie booking system
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: booking
+    description: Booking Details
+paths:
+  /booking/book:
+    post:
+      tags:
+        - booking
+      summary: Booking for the tickets
+      description: ''
+      operationId: BookTickets
+      parameters:
+        - in: body
+          name: body
+          description: Booking details like movie name theatre name quantity
+          required: true
+          schema:
+            $ref: '#/definitions/Booking'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Booking'
+        '400':
+          description: Invalid Order
+    delete:
+      tags:
+        - booking
+      summary: Delete booking details
+      description: ''
+      operationId: delete
+      parameters:
+        - name: bookingId
+          in: path
+          description: ID of the booking needed to be deleted
+          required: true
+          type: integer
+          minimum: 1
+          format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+  
+      
+definitions:
+  Booking:
+    type: object
+    properties:
+      bookingid:
+        type: integer
+        format: int64
+      theatreid:
+        type: string
+      movieid:
+        type: string
+      userid:
+        type: string
+      showdate:
+        type: string
+        formate: date
+      showTime:
+        type: string
+        format: date-time
+      totalcost:
+        type: integer
+        format: int64
+      seatsbooked:
+        type: integer
+        format: int64
+ 
+    xml:
+      name: Booking
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

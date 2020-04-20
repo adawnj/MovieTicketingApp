@@ -1,0 +1,118 @@
+swagger: '2.0'
+info:
+  description: 'This is the swagger about the online movie booking system '
+  version: 1.0.0
+  title: Swagger online movie booking system
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: user
+    description: User information
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Register user
+      description: 'If a new user come, then he needs to register itself.'
+      operationId: addUser
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        default:
+          description: successful operation
+  /user:
+    post:
+      tags:
+        - user
+      summary: adds user into the system
+      description: ''
+      operationId: registerUser
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: true
+          type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid username/password supplied
+  '/user/{userid}':        
+    put:
+      tags:
+        - user
+      summary: Update an existing user
+      description: ''
+      operationId: updateUser
+      parameters:
+        - in: body
+          name: body
+          description: User details need to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+        '405':
+          description: Validation exception
+ 
+    delete:
+      tags:
+        - user
+      summary: Deletes user 
+      description: ''
+      operationId: delete
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+definitions:
+  
+  User:
+    type: object
+    properties:
+      userid:
+        type: Integer
+      emailid:
+        type: string
+      password:
+        type: string
+      phonenumber:
+        type: string
+      age:
+        type: Integer
+      role:
+        type: string
+  
+    xml:
+      name: User
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

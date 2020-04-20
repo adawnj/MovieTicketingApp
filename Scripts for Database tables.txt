@@ -1,0 +1,88 @@
+SCRIPT FOR Booking DATABASE:
+CREATE DATABASE "Booking"
+    WITH 
+    OWNER = "user"
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+SCRIPT FOR USER TABLE:
+
+CREATE TABLE user(
+   userid SERIAL PRIMARY KEY,
+   username VARCHAR,
+	password VARCHAR,
+	age INTEGER,
+	emailid VARCHAR,
+	phonenumber VARCHAR,
+	role VARCHAR
+);
+
+INSERT INTO public."user"(
+	userid, username, password, age, emailid, phonenumber, role)
+	VALUES (DEFAULT, 'David', 'password','22', 'david@gmail.com', '9876543210', 'Admin');
+INSERT INTO public."user"(
+	userid, username, password, age, emailid, phonenumber, role)
+	VALUES (DEFAULT, 'Adrian', 'adrian', 70, 'adrian@gmail.com', '7054128759', 'User');
+
+SCRIPT FOR MOVIE TABLE:
+
+CREATE TABLE movie(
+   movieid SERIAL PRIMARY KEY,
+   moviename VARCHAR,
+	genre VARCHAR,
+	releasedate DATE,
+	rating INTEGER
+);
+
+INSERT INTO public.movie(
+	movieidd, moviename, genre, releasedate, rating)
+	VALUES (DEFAULT, 'The Avengers', 'Action', 20120603, 4);
+INSERT INTO public.movie(
+	movieid, moviename, genre, releasedate, rating)
+	VALUES (DEFAULT, 'One Day', 'Drama', '20201212', 5);
+
+SCRIPT FOR THEATER TABLES:
+
+CREATE TABLE theater(
+   theaterid SERIAL PRIMARY KEY,
+   theatername VARCHAR,
+	address VARCHAR,
+	seatingcapacity INTEGER,
+	city VARCHAR
+);
+INSERT INTO public.theater(
+	theaterid, theatername, address, seatingcapacity, city)
+	VALUES (DEFAULT, 'Carnival', 'Mall of Travancore', 120, 'Trivandrum');
+INSERT INTO public.theater(
+	theaterid, theatername, address, seatingcapacity, city)
+	VALUES (DEFAULT, 'Anand', 'Near KSRTC Bus stand', 200, 'Kottayam');
+
+SCRIPT FOR BOOKING TABLES:
+
+CREATE TABLE booking(
+   	bookingid SERIAL PRIMARY KEY,
+  	userid INTEGER,
+	showid INTEGER,
+	seatsbooked INTEGER,
+	totalcost float
+);
+INSERT INTO public.booking(
+	bookingid, userid, showid, seatsbooked, totalcost)
+	VALUES (default, 1, 1, 2, 300);
+
+CREATE TABLE show(
+   	showid SERIAL PRIMARY KEY,
+   	movieid INTEGER ,
+	theaterid INTEGER ,
+	unitprice float,
+	availableseats integer,
+	showdate date,
+	showtime time
+);
+
+INSERT INTO public.show(
+	showid, movieid, theaterid, unitprice, availableseats, showdate, showtime)
+	VALUES (default, 1, 1, 150, 120, "20201212", "1000");
